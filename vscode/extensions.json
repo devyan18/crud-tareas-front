@@ -1,0 +1,26 @@
+{
+  "recommendations": [
+    // formato de codigo en js
+    "esbenp.prettier-vscode",
+    // convierte el string de js a syntax de html
+    "jenkey2011.string-highlight",
+    // snippets de utiles
+    "dsznajder.es7-react-js-snippets",
+    // autocompletado de clases de tailwind
+    "bradlc.vscode-tailwindcss",
+    // convertir string de js a template string
+    "meganrogge.template-string-converter",
+    // dar formato a los archivos de markdown
+    "davidanson.vscode-markdownlint"
+  ],
+  "configurations": [
+    {
+      "editor.formatOnSave": true,
+      "editor.tabSize": 2,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "files.associations": {
+        "*.css": "tailwindcss"
+      }
+    }
+  ]
+}

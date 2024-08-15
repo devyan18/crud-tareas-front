@@ -12,15 +12,5 @@
     "meganrogge.template-string-converter",
     // dar formato a los archivos de markdown
     "davidanson.vscode-markdownlint"
-  ],
-  "configurations": [
-    {
-      "editor.formatOnSave": true,
-      "editor.tabSize": 2,
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "files.associations": {
-        "*.css": "tailwindcss"
-      }
-    }
   ]
 }

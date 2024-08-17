@@ -1,56 +1,34 @@
-import "./style.css";
-import { createTask, deleteTask } from "./tasks.js";
+import "./styles/style.css";
 
-const $app = document.getElementById("app");
+import { getAllTasks, postTasks } from "./services";
+import { renderTask } from "./tasks";
 
-export const API_URL = "http://localhost:4000/tasks";
+const $app = document.querySelector("#app");
+const $taskForm = document.querySelector("#create-task-form");
 
-const renderTasks = async () => {
-  $app.innerHTML = "";
+$taskForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-  return fetch(API_URL)
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((tarea) => {
-        $app.innerHTML += createTask(tarea);
-      });
-      return data;
-    })
-    .then((e) => {
-      e.forEach((e) => {
-        const $delBtn = document.getElementById(`delete-btn-${e.id}`);
-        $delBtn.addEventListener("click", async () => {
-          await deleteTask(e.id).then(async (e) => {
-            await renderTasks();
-          });
-        });
-      });
-    });
-};
+  const $title = document.querySelector("#input-title");
+  const $description = document.querySelector("#input-description");
+  const $isComplete = document.querySelector("#input-is-complete");
 
-const $taskForm = document.getElementById("create-task-form");
+  const newTask = {
+    title: $title.value,
+    description: $description.value,
+    isComplete: $isComplete.checked,
+  };
 
-$taskForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const $titleInput = document.getElementById("input-title");
-  const $descriptionInput = document.getElementById("input-description");
-  const $isCompleteInput = document.getElementById("input-is-complete");
-
-  fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      title: $titleInput.value,
-      description: $descriptionInput.value,
-      isComplete: $isCompleteInput.checked,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(async () => {
-    e.target.reset();
-    await renderTasks();
+  postTasks(newTask).then((result) => {
+    $app.appendChild(renderTask(result));
+    event.target.reset();
   });
 });
 
-document.addEventListener("DOMContentLoaded", renderTasks);
+document.addEventListener("DOMContentLoaded", () => {
+  getAllTasks().then((tasks) => {
+    tasks.forEach((task) => {
+      $app.appendChild(renderTask(task));
+    });
+  });
+});

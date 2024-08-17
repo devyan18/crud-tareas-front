@@ -8,12 +8,35 @@
   <body>
     <form id="create-task-form">
       <h2>Create task</h2>
-      <input type="text" name="title" id="input-title" />
-      <textarea name="description" id="input-description"></textarea>
-      <input type="checkbox" name="isComplete" id="input-is-complete" />
+
+      <div class="form-control">
+        <label for="input-title">Enter title</label>
+        <input
+          type="text"
+          name="title"
+          id="input-title"
+          placeholder="Study JavaScript"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="input-description">Description</label>
+        <textarea
+          name="description"
+          id="input-description"
+          placeholder="Study JavaScript basics"
+        ></textarea>
+      </div>
+
+      <div>
+        <input type="checkbox" name="isComplete" id="input-is-complete" />
+        <label for="input-is-complete">Is complete?</label>
+      </div>
       <button type="submit">Create</button>
     </form>
-    <div id="app"></div>
+    <div id="app" class="task-list">
+      <h2>Tasks</h2>
+    </div>
     <script type="module" src="src/main.js"></script>
   </body>
 </html>
